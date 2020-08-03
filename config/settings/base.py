@@ -76,6 +76,8 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "smcrm.users.apps.UsersConfig",
+    "smcrm.projects.apps.ProjectsConfig",
+    "smcrm.developers.apps.DevelopersConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

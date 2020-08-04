@@ -15,6 +15,10 @@ class Project(TimeStampedModel):
     developers = models.ManyToManyField('developers.Developer', blank=True, related_name='projects')
 
     @property
+    def owner(self):
+        return self.user
+
+    @property
     def total_tasks(self):
         return self.tasks.all().count()
 

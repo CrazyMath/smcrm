@@ -1,6 +1,10 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
+from projects.permissions import IsOwner
+from projects.serializers import ProjectSerializer
 from smcrm.projects.models import Project
 
 
@@ -24,5 +28,11 @@ class ProjectCreateView(CreateView):
         return reverse('projects:projects')
 
 
+class ProjectModelViewSet(ModelViewSet):
+    queryset = Project.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner)
+    serializer_class = ProjectSerializer
 
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)

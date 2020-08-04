@@ -20,7 +20,15 @@
         <th scope="row">{{ object }}</th>
         <td>{{ object.total_tasks }}</td>
         <td>{{ object.total_developers }}</td>
-        <td>Column content</td>
+        <td>
+          <a href="{% url 'projects:projects-detail' object.pk %}" class="delete-project">
+            Delete
+          </a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="4">{% trans "There aren't any project. Use `Add Project` to create new project." %}</td>
       </tr>
     {% endfor %}
     </tbody>

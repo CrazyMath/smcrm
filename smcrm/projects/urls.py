@@ -4,7 +4,7 @@ from rest_framework import routers
 from smcrm.projects.views import ProjectsView, ProjectCreateView, ProjectModelViewSet
 
 router = routers.SimpleRouter()
-router.register(r'api/projects', ProjectModelViewSet)
+router.register(r'api/projects', ProjectModelViewSet, basename='projects')
 urlpatterns = router.urls
 
 app_name = "projects"

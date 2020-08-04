@@ -1,4 +1,4 @@
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views.generic import ListView, CreateView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet

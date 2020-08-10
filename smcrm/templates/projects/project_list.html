@@ -16,12 +16,16 @@
     </thead>
     <tbody>
     {% for object in object_list %}
-      <tr>
+      <tr data-project="{{ object.id }}">
         <th scope="row">{{ object }}</th>
         <td>{{ object.total_tasks }}</td>
         <td>{{ object.total_developers }}</td>
         <td>
-          <a href="{% url 'projects:projects-detail' object.pk %}" class="delete-project">
+          <a href="{% url 'projects:projects-detail' object.pk %}"
+             class="delete-confirmation"
+             data-message="{% trans 'Are you sure that you want to delete project: ' %}{{ object.name }}?"
+            data-delete-message="{{ object.name }} {% trans 'was deleted successfully!' %}"
+            data-delete-container="[data-project='{{ object.id }}']">
             Delete
           </a>
         </td>

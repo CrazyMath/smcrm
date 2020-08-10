@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>{% trans 'Developers Management' %}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">{% trans 'Name' %}</th>
+          <th scope="col">{% trans 'Productivity' %}</th>
+          <th scope="col">{% trans 'Actions' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+          <tr data-project="{{ object.id }}">
+            <th scope="row">{{ object }}
+              <input type="text" name="name" class="form-control" placeholder="{% trans 'Username' %}"
+                     value="{{ object.name }}">
+            </th>
+            <td>
+              <input type="number"
+                     name="name"
+                     class="form-control"
+                     min="0.01"
+                     max="1"
+                     step="0.01"
+                     placeholder="{% trans 'Productivity' %}" value="{{ object.productivity }}">
+            </td>
+            <td>
+
+            </td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td>
+            <input type="text" name="name" class="form-control" placeholder="{% trans 'Username' %}"
+                   value="{{ object.name }}">
+          </td>
+          <td>
+            <input type="number"
+                   name="name"
+                   class="form-control"
+                   min="0.01"
+                   max="1"
+                   step="0.01"
+                   placeholder="{% trans 'Productivity' %}" value="1">
+          </td>
+          <td>
+            Save
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock content %}
+

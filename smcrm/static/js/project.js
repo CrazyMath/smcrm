@@ -56,9 +56,38 @@ jQuery(document).ready(function ($) {
                 deleteConfirmationModal.modal('hide')
             },
             error: function (data) {
-                toastr.success('An error occurred. Try again later.');
+                toastr.error('An error occurred. Try again later.');
+            }
+        })
+    });
+    // END DELETE CONFIRMATION
+
+    // START CREATE NEW DEVELOPER
+    $(document).on('click', '.create-developer', function (e) {
+        e.preventDefault();
+        const _this = $(this);
+        const inlineForm = _this.parents('tr');
+        const url = _this.attr('data-url');
+        const tableDevelopers = $('#table-developers');
+        let data = {
+            name: inlineForm.find('input[name="name"]').val(),
+            productivity: inlineForm.find('input[name="productivity"]').val()
+        };
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            success: function (data) {
+                console.log(data)
+                toastr.success('Developer was added successfully.');
+            },
+            error: function (data) {
+                toastr.error('An error occurred. Try again later.');
             }
         })
     })
-    // END DELETE CONFIRMATION
+    // END CREATE NEW DEVELOPER
 });

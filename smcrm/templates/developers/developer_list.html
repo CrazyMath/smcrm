@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n static %}
+{% load l10n %}
 
 {% block title %}User: {{ object.username }}{% endblock %}
 
@@ -11,7 +12,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <table class="table table-hover">
+      <table class="table table-hover" id="table-developers">
         <thead>
         <tr>
           <th scope="col">{% trans 'Name' %}</th>
@@ -21,22 +22,28 @@
         </thead>
         <tbody>
         {% for object in object_list %}
-          <tr data-project="{{ object.id }}">
-            <th scope="row">{{ object }}
+          <tr data-developer="{{ object.pk }}">
+            <th scope="row">
               <input type="text" name="name" class="form-control" placeholder="{% trans 'Username' %}"
                      value="{{ object.name }}">
             </th>
             <td>
               <input type="number"
-                     name="name"
+                     name="productivity"
                      class="form-control"
                      min="0.01"
                      max="1"
                      step="0.01"
-                     placeholder="{% trans 'Productivity' %}" value="{{ object.productivity }}">
+                     placeholder="{% trans 'Productivity' %}" value="{{ object.productivity|unlocalize }}">
             </td>
             <td>
-
+              <a href="{% url 'developers:developers-detail' object.pk %}"
+                 class="delete-confirmation"
+                 data-message="{% trans 'Are you sure that you want to delete developer: ' %}{{ object.name }}?"
+                 data-delete-message="{{ object.name }} {% trans 'was deleted successfully!' %}"
+                 data-delete-container="[data-developer='{{ object.pk }}']">
+                Delete
+              </a>
             </td>
           </tr>
         {% endfor %}
@@ -47,7 +54,7 @@
           </td>
           <td>
             <input type="number"
-                   name="name"
+                   name="productivity"
                    class="form-control"
                    min="0.01"
                    max="1"
@@ -55,7 +62,7 @@
                    placeholder="{% trans 'Productivity' %}" value="1">
           </td>
           <td>
-            Save
+            <a href="" data-url="{% url 'developers:developers-list' %}" class="create-developer">Create</a>
           </td>
         </tr>
         </tbody>
